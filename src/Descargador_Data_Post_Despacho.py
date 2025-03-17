@@ -27,12 +27,12 @@ def fetch_data_for_date(date_str):
         return None
 
 # Crear la carpeta para guardar los archivos si no existe
-folder = "generación post despacho"
+folder = r"data\raw"
 os.makedirs(folder, exist_ok=True)
 
 # Define el rango de fechas para descargar los datos
-start_date = datetime(2024, 7, 7)
-end_date = datetime(2025, 3, 9)
+start_date = datetime(2025, 3, 9)
+end_date = datetime(2025, 3, 16)
 print(f'Descargando datos del rango: {start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}')
 
 current_date = start_date
