@@ -30,8 +30,8 @@ folder = r"data\raw"
 os.makedirs(folder, exist_ok=True)
 
 # Define the date range for data download
-start_date = datetime(2025, 3, 15)
-end_date = datetime(2025, 3, 16)
+start_date = datetime(2025, 3, 16)
+end_date = datetime(2025, 3, 19)
 print(f"Downloading data for the range: {start_date.strftime('%Y-%m-%d')} - {end_date.strftime('%Y-%m-%d')}")
 
 current_date = start_date
