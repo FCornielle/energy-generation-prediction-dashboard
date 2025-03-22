@@ -30,8 +30,8 @@ folder = r"data\raw\post_despacho_data"
 os.makedirs(folder, exist_ok=True)
 
 # Define the date range for data download
-start_date = datetime(2025, 3, 16)
-end_date = datetime(2025, 3, 19)
+start_date = datetime(2025, 3, 20)
+end_date = datetime(2025, 3, 21)
 print(f"Downloading data for the range: {start_date.strftime('%Y-%m-%d')} - {end_date.strftime('%Y-%m-%d')}")
 
 current_date = start_date
