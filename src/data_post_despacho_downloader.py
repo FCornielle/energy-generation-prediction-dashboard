@@ -26,7 +26,7 @@ def fetch_data_for_date(date_str):
         return None
 
 # Create the folder to store the files if it does not exist
-folder = r"data\raw"
+folder = r"data\raw\post_despacho_data"
 os.makedirs(folder, exist_ok=True)
 
 # Define the date range for data download
