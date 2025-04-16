@@ -1,0 +1,35 @@
+manage service principal
+fcornielle-Energy Dashboard CI CD-713185ab-82f6-492c-a69f-d1531cc1be7b
+
+build pipeline
+ADF CI Option 2 Build Pipeline
+
+Bioenergía – Verde natural:
+
+HEX: #27AE60
+
+Razón: Asociado a lo orgánico/biomasa.
+
+Eólica – Azul aire:
+
+HEX: #2980B9
+
+Razón: Representa el cielo y el viento.
+
+Hidro – Verde azulado (turquesa/teal):
+
+HEX: #16A085
+
+Razón: Relacionado con el agua dulce y la hidroelectricidad.
+
+Solar – Amarillo/naranja brillante:
+
+HEX: #F39C12
+
+Razón: Evoca el sol y la energía solar.
+
+Térmica – Rojo cálido:
+
+HEX: #C0392B
+
+Razón: Suele asociarse al calor o combustión.
