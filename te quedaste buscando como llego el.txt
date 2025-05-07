@@ -1,0 +1,5 @@
+te quedaste buscando como llego el parque_solar_girasol_clean.parquet al interim folder, y que deberia de llegar a la data ya procesada a processed
+
+
+
+Escribir orden de archivo local en la pizarra
