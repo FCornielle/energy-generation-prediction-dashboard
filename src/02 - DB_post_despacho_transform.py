@@ -2,7 +2,7 @@ import glob
 import pandas as pd
 import sys, os
 # Folder containing the .parquet files
-folder_path = r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\raw\post_despacho_data"
+folder_path = r"data\raw\post_despacho_data"
 
 
 # Find all .parquet files in the folder
@@ -463,7 +463,7 @@ print("Transformed DataFrame (timestamp and plant columns):")
 print(df_transformed)
 
 # Folder and filename for the output
-output_folder = r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\interim\post_despacho_transformed_data"
+output_folder = r"data\interim\post_despacho_transformed_data"
 output_filename = "post_despacho_transformed.parquet"
 
 # Construct the full path

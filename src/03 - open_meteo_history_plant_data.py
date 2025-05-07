@@ -93,8 +93,8 @@ def process_plant(row, client, cutoff_time, HOURLY_VARS, output_folder):
 def main():
     global calls_today
     # Configuración
-    CENTRAL_INFO_CSV = r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\lookup\central_info.csv"
-    OUTPUT_FOLDER = r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\raw\open_meteo_data"
+    CENTRAL_INFO_CSV = r"data\lookup\central_info.csv"
+    OUTPUT_FOLDER = r"data\raw\open_meteo_data"
     MAX_DAILY_CALLS = 10000
 
     # Nueva lista HOURLY_VARS con las variables deseadas

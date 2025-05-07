@@ -114,15 +114,15 @@ def process_all_meteo_files(gen_path: Path, meteo_dir: Path, lookup_path: Path, 
 # MAIN EXECUTION
 # -------------------------------------------
 if __name__ == "__main__":
-    GEN_PATH = Path(r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\interim\post_despacho_transformed_data")
-    METEO_DIR = Path(r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\raw\open_meteo_data")
-    LOOKUP_PATH = Path(r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\lookup\central_info.csv") 
+    GEN_PATH = Path(r"data\interim\post_despacho_transformed_data")
+    METEO_DIR = Path(r"data\raw\open_meteo_data")
+    LOOKUP_PATH = Path(r"data\lookup\central_info.csv") 
 
     # Adjust shift_hours as needed (+4, -4, etc.)
     merged_data = process_all_meteo_files(GEN_PATH, METEO_DIR, LOOKUP_PATH, shift_hours=-4)
 
     # Save each merged DataFrame
-    output_dir = Path(r"C:\Users\ferna\Documents\Desktop\11 - Masters\00 - Master AI\99 - Proyecto Final\energy-generation-prediction-dashboard\data\interim\meteo_data_with_generation")
+    output_dir = Path(r"data\interim\meteo_data_with_generation")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for plant_name, df in merged_data.items():
