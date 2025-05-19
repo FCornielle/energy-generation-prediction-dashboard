@@ -1,0 +1,7 @@
+name: inference-aml-workspace
+location: eastus2
+resource_group: dev-inference-energy-dashboard-rg
+storage_account: /subscriptions/035dee2d-8c73-4fdb-bfba-d409d08d2128/resourceGroups/dev-inference-energy-dashboard-rg/providers/Microsoft.Storage/storageAccounts/inferenceamlstoragefccc
+key_vault: /subscriptions/035dee2d-8c73-4fdb-bfba-d409d08d2128/resourceGroups/dev-inference-energy-dashboard-rg/providers/Microsoft.KeyVault/vaults/inferencekvfccc
+application_insights: /subscriptions/035dee2d-8c73-4fdb-bfba-d409d08d2128/resourceGroups/dev-inference-energy-dashboard-rg/providers/microsoft.insights/components/inference-aml-appinsights
+description: "Workspace for model deployment and inference"
