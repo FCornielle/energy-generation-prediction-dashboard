@@ -1,21 +1,14 @@
-name: default
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: solar-deployment
 endpoint_name: solar-endpoint
-
 model: azureml:solar-generation-model:1
-
+environment: acr://energydashacr.azurecr.io/energy-dashboard:py3.11
 code_configuration:
-  code: ./src
+  code: src
   scoring_script: score.py
-
-environment:
-  name: solar-env
-  image: mcr.microsoft.com/azureml/minimal-ubuntu20.04-py38-cpu-inference:latest
-  conda_file: .github/environments/env.yml
-
-instance_type: Standard_DS2_v2
-
+instance_type: Standard_DS3_v2
 scale_settings:
-  type: default
-  min_instances: 0
-  max_instances: 1
-  idle_time_before_scale_down: 5m
+  type: target_utilization
+  min_replicas: 1
+  max_replicas: 3
+  target_utilization: 70
