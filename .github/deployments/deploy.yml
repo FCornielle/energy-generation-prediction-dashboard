@@ -1,14 +1,11 @@
-$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: solar-deployment
+# .github/deployments/deploy.yml
+$schema: https://azuremlschemas.azureedge.net/latest/onlineDeployment.schema.json
+name: solar-generation-deployment-v1
 endpoint_name: solar-endpoint
 model: azureml:solar-generation-model:1
-environment: acr://energydashacr.azurecr.io/energy-dashboard:py3.11
+environment: azureml:solar-generation-env:6
 code_configuration:
-  code: src
+  code: ../../src
   scoring_script: score.py
-instance_type: Standard_DS3_v2
-scale_settings:
-  type: target_utilization
-  min_replicas: 1
-  max_replicas: 3
-  target_utilization: 70
+instance_type: Standard_DS2_v2  # <--- CHANGE THIS LINE
+instance_count: 1
