@@ -1,0 +1,11 @@
+# .github/deployments/deploy.yml
+$schema: https://azuremlschemas.azureedge.net/latest/onlineDeployment.schema.json
+name: solar-generation-deployment-v1
+endpoint_name: solar-endpoint
+model: azureml:solar-generation-model:1
+environment: azureml:solar-generation-env:6
+code_configuration:
+  code: ../../src
+  scoring_script: score.py
+instance_type: Standard_DS2_v2  # <--- CHANGE THIS LINE
+instance_count: 1

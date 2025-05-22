@@ -1,0 +1,63 @@
+# Core data handling and numerical computing
+numpy==2.1.3
+pandas==2.2.3
+
+# Machine Learning libraries your model uses
+scikit-learn==1.5.2
+scipy==1.15.3
+lightgbm==4.6.0
+xgboost==3.0.0
+
+# Model serialization (how you saved your model)
+# Assuming you used joblib to save your model (e.g., model.pkl)
+joblib==1.5.0
+
+# Dependencies for your data fetching in score.py (OpenMeteo)
+openmeteo_requests==1.4.0
+openmeteo_sdk==1.20.0
+requests==2.32.3
+requests-cache==1.2.1
+retry-requests==2.0.0
+
+# Utilities that might be implicitly used by other packages or for basic Python operations
+# These are often very stable and broadly compatible
+python-dateutil==2.9.0.post0
+pytz==2025.2
+six==1.17.0
+packaging==25.0
+charset-normalizer==3.4.2
+idna==3.10
+urllib3==2.4.0
+certifi==2025.4.26
+azureml-inference-server-http
+
+# Optional: If your model uses TensorFlow/Keras for any part of inference (e.g., custom layers, specific preprocessing)
+# Make sure to specify the CPU-only version if not using GPU
+# tensorflow_cpu==2.19.0
+# If you trained with Keras 3 (which can use JAX/PyTorch/TensorFlow backends)
+# namex==0.0.9 # Used by Keras
+# keras==3.9.2 # If Keras is explicitly used in score.py
+# ml_dtypes==0.5.1
+# flatbuffers==25.2.10
+# gast==0.6.0
+# google-pasta==0.2.0
+# grpcio==1.71.0
+# h5py==3.13.0
+# opt_einsum==3.4.0
+# optree==0.15.0
+# protobuf==5.29.4
+# tensorboard==2.19.0 # Usually not needed for inference
+# tensorboard-data-server==0.7.2 # Usually not needed for inference
+# tensorflow-io-gcs-filesystem==0.31.0 # Only if reading from GCS
+# termcolor==3.1.0
+# wrapt==1.17.2
+
+# Explicitly excluded problematic/unnecessary packages from your original list:
+# pywin32           # Windows specific - CRITICAL TO EXCLUDE
+# matplotlib        # Visualization - typically not needed for inference
+# seaborn           # Visualization - typically not needed for inference
+# ipykernel, ipython, jupyter_client, jupyter_core # Interactive development - not needed for inference
+# debugpy           # Debugging - not needed for production inference
+# rich, wcwidth     # Rich text output - not needed for inference
+# psutil            # System utilities - rarely needed for simple inference
+# Any other dev-only or non-Linux compatible packages.
