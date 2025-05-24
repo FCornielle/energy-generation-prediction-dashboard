@@ -3,9 +3,9 @@ $schema: https://azuremlschemas.azureedge.net/latest/onlineDeployment.schema.jso
 name: solar-generation-deployment-v1
 endpoint_name: solar-endpoint
 model: azureml:solar-generation-model:1
-environment: azureml:solar-generation-env:6
+environment: azureml:solar-generation-env:11
 code_configuration:
-  code: ../../src
+  code: ../../.github/environments/src
   scoring_script: score.py
-instance_type: Standard_DS2_v2  # <--- CHANGE THIS LINE
+instance_type: Standard_F2s_v2  # <---Normaly use Standard_DS1_v2
 instance_count: 1

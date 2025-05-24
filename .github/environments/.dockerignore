@@ -1,0 +1,15 @@
+# Ignorar archivos temporales
+*.tmp
+*.log
+*.swp
+
+# Ignorar carpetas de caché/dependencias
+__pycache__/
+.venv/
+env/
+venv/
+node_modules/
+
+# Ignorar archivos específicos si no son necesarios para el build
+env.yml # no necesitas subir el propio env.yml al contexto de Docker si no es copiado por Dockerfile
+# etc.

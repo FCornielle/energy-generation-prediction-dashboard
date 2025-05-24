@@ -1,0 +1,9 @@
+# autoscaling_settings.yml
+name: solar-generation-deployment-v1 # Must match your existing deployment name
+endpoint_name: solar-endpoint # Must match your existing endpoint name
+scale_settings:
+  type: target_utilization # Enable metric-based autoscaling
+  min_instances: 0 # Allows scaling down to zero instances when idle
+  max_instances: 1 # Maximum number of instances (adjust as needed for your workload)
+  polling_interval_in_seconds: 60 # How often (in seconds) Azure monitors metrics for scaling decisions
+  target_utilization_percentage: 20 # Target CPU utilization. Scale-in occurs if utilization drops below this.
