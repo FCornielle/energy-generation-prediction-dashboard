@@ -1,0 +1,8 @@
+Modelo,CV_MAE,Mejores_Hiperparametros,Complejidad,Ranking
+RandomForestRegressor,5.0148,"n_estimators=200, max_depth=20, min_samples_leaf=5",Baja,1
+XGBoostRegressor,5.2227,"n_estimators=100, max_depth=4, learning_rate=0.1",Media,2
+GradientBoostingRegressor,5.3272,"n_estimators=100, max_depth=3, learning_rate=0.1, subsample=0.8",Media,3
+LSTM,14.9515,"units=16, optimizer=adam, batch_size=32, epochs=10",Alta,4
+
+
+
