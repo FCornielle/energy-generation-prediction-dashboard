@@ -7,4 +7,5 @@ notebooks/Model_Comparison_Table.csv
 notebooks/GetPostDespacho_2025-07-07-10.csv
 notebooks/.cache.sqlite
 .cache.sqlite
-manage\ service\ principal.txt
+manage service principal.txt
+src/__pycache__
