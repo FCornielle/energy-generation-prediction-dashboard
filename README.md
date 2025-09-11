@@ -1,63 +1,63 @@
 # 🧪 Energy Generation Prediction Dashboard
 
-Este repositorio contiene el **pipeline completo de ciencia de datos** para predecir la generación de energía solar. El proyecto sigue las mejores prácticas de MLops y está diseñado para desplegar el modelo final en **Azure Functions**.
+This repository contains the **complete data science pipeline** for predicting solar energy generation. The project follows MLops best practices and is designed to deploy the final model in **Azure Functions**.
 
-## 🎯 Objetivo Principal
+## 🎯 Main Objective
 
-Desarrollar un modelo de machine learning que prediga la generación de energía solar basándose en:
-- **Datos meteorológicos** (temperatura, radiación, humedad, etc.)
-- **Datos históricos de generación** (post-despacho 2013)
-- **Características temporales** (hora, día, mes, estacionalidad)
+Develop a machine learning model that predicts solar energy generation based on:
+- **Meteorological data** (temperature, radiation, humidity, etc.)
+- **Historical generation data** (post-despacho 2013)
+- **Temporal features** (hour, day, month, seasonality)
 
-## 📊 Arquitectura del Proyecto
+## 📊 Project Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           🧪 CIENCIA DE DATOS                              │
+│                           🧪 DATA SCIENCE                                  │
 └─────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   📡 APIs       │    │   🗄️ Datos      │    │   🔧 Pipeline   │
-│                 │    │   Históricos    │    │   de Proceso    │
+│   📡 APIs       │    │   🗄️ Data       │    │   🔧 Pipeline   │
+│                 │    │   Historical    │    │   Processing    │
 ├─────────────────┤    ├─────────────────┤    ├─────────────────┤
-│ • Open-Meteo    │    │ • Post-Despacho │    │ • Descarga      │
-│ • Forecast API  │    │ • 2013 (diario) │    │ • Limpieza      │
-│ • 50+ variables │    │ • Generación    │    │ • Transformación│
-│ • 7 días ahead  │    │   real          │    │ • Fusión        │
+│ • Open-Meteo    │    │ • Post-Despacho │    │ • Download      │
+│ • Forecast API  │    │ • Since 2013    │    │ • Cleaning      │
+│ • 30 variables  │    │ • Real          │    │ • Transformation│
+│ • 2 days ahead  │    │   generation    │    │ • Merging       │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          └───────────────────────┼───────────────────────┘
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           📊 DATOS PROCESADOS                              │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
+│                           📊 PROCESSED DATA                               │
+├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
 │   📁 raw/       │   📁 interim/   │  📁 processed/  │   📁 lookup/        │
-│                 │                 │                 │                     │
-│ • Datos crudos  │ • En proceso    │ • Listos para   │ • Metadatos         │
-│ • Sin filtrar   │ • Parcialmente  │   modelado      │ • Referencias       │
-│ • APIs directas │   limpios       │ • Características│ • Centrales         │
-└─────────────────┴─────────────────┴─────────────────┴─────────────────────┘
+│                 │                 │                 │                       │
+│ • Raw data      │ • In process    │ • Ready for     │ • Metadata           │
+│ • Unfiltered    │ • Partially     │   modeling      │ • References         │
+│ • Direct APIs   │   cleaned       │ • Features      │ • Solar plants       │
+└─────────────────┴─────────────────┴─────────────────┴───────────────────────┘
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        🔬 INGENIERÍA DE CARACTERÍSTICAS                    │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
-│   ⏰ Temporales  │   📈 Lags       │   📊 Rolling    │   🔄 Diferencias   │
+│                        🔬 FEATURE ENGINEERING                              │
+├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
+│ ⏰ Temporal     │   📈 Lags       │   📊 Rolling    │   🔄 Differences   │
 │                 │                 │   Windows       │                     │
-│ • hora_sin/cos  │ • Variables     │ • Medias móviles│ • Variables no     │
-│ • dow_sin/cos   │   retrasadas    │ • 3h, 6h, 24h  │   estacionarias    │
-│ • month_sin/cos │ • Mejor lag     │ • Estadísticas  │ • Diff(1)          │
-│ • Codificación  │   encontrado    │   descriptivas  │ • Estacionarización│
-│   cíclica       │ • Correlación   │                 │                     │
+│ • hora_sin/cos  │ • Lagged        │ • Moving        │ • Non-stationary  │
+│ • dow_sin/cos   │   variables     │   averages      │   variables        │
+│ • month_sin/cos │ • Best lag      │ • 3h, 6h, 24h  │ • Diff(1)         │
+│ • Cyclical      │   found         │ • Descriptive   │ • Stationarity     │
+│   encoding      │ • Correlation   │   statistics    │                     │
 └─────────────────┴─────────────────┴─────────────────┴─────────────────────┘
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           🤖 MODELADO ML                                   │
+│                           🤖 ML MODELING                                   │
 ├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
-│   📓 Notebooks  │   🔧 Feature    │   🎯 Modelo     │   📈 Evaluación    │
-│                 │   Engineer      │   Entrenado     │                     │
+│   📓 Notebooks  │   🔧 Feature    │   🎯 Trained    │   📈 Evaluation    │
+│                 │   Engineer      │   Model         │                     │
 │ • Exploratory   │ • SolarFeature  │ • RandomForest  │ • RMSE, MAE        │
 │ • Feature Eng.  │   Engineer      │ • XGBoost       │ • R², MAPE         │
 │ • Model Search  │ • Pipeline      │ • LightGBM      │ • TimeSeriesSplit  │
@@ -66,204 +66,174 @@ Desarrollar un modelo de machine learning que prediga la generación de energía
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        💾 MODELOS SERIALIZADOS                             │
+│                        💾 SERIALIZED MODELS                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │   📁 models/                                                              │
 │                                                                           │
 │ • solar_feature_engineer.joblib (13KB)                                   │
-│   └─ Pipeline de preprocesamiento                                        │
+│   └─ Preprocessing pipeline                                               │
 │                                                                           │
 │ • solar_generation_model.joblib (44MB)                                   │
-│   └─ Modelo de predicción final                                          │
+│   └─ Final prediction model                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
                                  │
                                  ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        🚀 PREPARACIÓN AZURE FUNCTIONS                      │
+┌───────────────────────────────────────────────────────────────────────────┐
+                         🚀 AZURE FUNCTIONS PREPARATION                     
 ├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
-│   📄 function_  │   📁 utils/     │   📄 require-   │   🔧 Triggers      │
+    📄 function_     📁 utils/         📄 require-      🔧 Triggers      
 │   app.py        │                 │   ments.txt     │                     │
 │                 │                 │                 │                     │
-│ • Endpoint HTTP │ • data_processor│ • Dependencias  │ • HTTP Request      │
-│ • Predict API   │ • feature_eng.  │   mínimas       │ • Timer (cron)      │
-│ • Error handling│ • Validación    │ • joblib        │ • Blob Storage      │
-│ • Logging       │ • Caché         │ • pandas        │ • Event Hub         │
+│ • HTTP Endpoint │ • data_processor│ • Minimal       │ • HTTP Request      │
+│ • Predict API   │ • feature_eng.  │   dependencies  │ • Timer (cron)      │
+│ • Error handling│ • Validation    │ • joblib        │ • Blob Storage      │
+│ • Logging       │ • Cache         │ • pandas        │ • Event Hub         │
 └─────────────────┴─────────────────┴─────────────────┴─────────────────────┘
                                  │
                                  ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           📊 POWER BI DASHBOARD                            │
-├─────────────────────────────────────────────────────────────────────────────┤
+┌───────────────────────────────────────────────────────────────────────────┐
+                           📊 POWER BI DASHBOARD                           
+├───────────────────────────────────────────────────────────────────────────┤
 │                                                                           │
-│ • Visualización de predicciones                                           │
-│ • Métricas en tiempo real                                                 │
-│ • Alertas y notificaciones                                                │
-│ • Exportación de reportes                                                 │
+│ • Prediction visualization                                                │
+│ • Real-time metrics                                                       │
+│ • Alerts and notifications                                                │
+│ • Report export                                                           │
 │                                                                           │
-└─────────────────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 📁 Estructura Detallada del Proyecto
+## 📁 Detailed Project Structure
 
 ```
 energy-generation-prediction-dashboard/
-├── 📄 README.md                           # Descripción general del proyecto
-├── 📄 requirements.txt                     # Dependencias de Python (93 líneas)
-├── 📄 .gitignore                          # Archivos y carpetas a ignorar
-├── 📄 manage service principal.txt        # Configuración de Azure Service Principal
+├── 📄 README.md                           # Project overview
+├── 📄 requirements.txt                     # Python dependencies (93 lines)
+├── 📄 .gitignore                          # Files and folders to ignore
 │
-├── 📊 data/                               # Datos del proyecto
-│   ├── 📁 raw/                            # Datos originales (sin procesar)
-│   │   ├── 📁 forecast_meteo_data/        # Datos meteorológicos de pronóstico
-│   │   │   └── parque_solar_girasol_forecast_api_request.csv
-│   │   ├── 📁 open_meteo_data/           # Datos meteorológicos históricos
-│   │   │   └── parque_solar_girasol.parquet
-│   │   └── 📁 post_despacho_data/        # Datos de post-despacho (2013)
-│   │       └── [+4378 archivos .parquet]  # Datos diarios del año 2013
-│   ├── 📁 interim/                        # Datos intermedios (parcialmente procesados)
-│   │   ├── 📁 forecast_meteo_data_transform/
-│   │   │   └── parque_solar_girasol_forecast_api_transformed.csv
-│   │   ├── 📁 meteo_data_with_generation/
-│   │   │   └── parque_solar_girasol.parquet
-│   │   ├── 📁 meteo_data_with_generation_clean/
-│   │   │   └── parque_solar_girasol_clean.parquet
-│   │   └── 📁 post_despacho_transformed_data/
-│   │       ├── post_despacho_transformed.parquet
-│   │       └── post_despacho_transformed_parquet_fix.parquet
-│   ├── 📁 processed/                      # Datos finales listos para modelado
-│   │   ├── parque_solar_girasol_model_ready.parquet
-│   │   ├── parque_solar_girasol_forecast_model_ready.parquet
-│   │   └── parque_solar_girasol_predicciones_alineadas.csv
-│   ├── 📁 processed_predictions/          # Predicciones del modelo
-│   │   └── parque_solar_girasol_generation.csv
-│   └── 📁 lookup/                         # Datos de referencia
-│       ├── central_info.csv               # Información de centrales solares
-│       └── meteo_variables.csv           # Variables meteorológicas
+├── 📊 data/                               # Project data
+│   ├── 📁 raw/                            # Original data (unprocessed)
+│   │   └── 📁 post_despacho_data/         # Post-despacho data (2013)
+│   │       └── [+4,628 .parquet files]   # Daily data from 2013
+│   └── 📁 lookup/                         # Reference data
+│       ├── central_info.csv               # Solar plant information
+│       └── meteo_variables.csv           # Meteorological variables
 │
-├── 🔧 src/                                # Código fuente principal
-│   ├── 📄 01 - data_post_despacho_downloader.py    # Descargador de datos post-despacho
-│   ├── 📄 02 - DB_post_despacho_transform.py       # Transformación de datos post-despacho
-│   ├── 📄 03 - open_meteo_history_plant_data.py    # Datos meteorológicos históricos
-│   ├── 📄 04 - open_meteo_post_despacho_merger.py  # Fusión de datos meteorológicos y post-despacho
-│   └── 📄 feature_engineer.py                      # Ingeniería de características
+├── 🔧 src/                                # Main source code
+│   ├── 📄 01 - data_post_despacho_downloader.py    # Post-despacho data downloader
+│   ├── 📄 02 - DB_post_despacho_transform.py       # Post-despacho data transformation
+│   ├── 📄 03 - open_meteo_history_plant_data.py    # Historical meteorological data
+│   ├── 📄 04 - open_meteo_post_despacho_merger.py  # Meteorological and post-despacho data merging
+│   └── 📄 feature_engineer.py                      # Feature engineering
 │
-├── 📓 notebooks/                          # Jupyter notebooks de análisis
-│   ├── 📄 Exploratory analysis.ipynb      # Análisis exploratorio inicial (9.6MB)
-│   ├── 📄 Feature Engineering.ipynb       # Ingeniería de características (368KB)
-│   ├── 📄 Model Builder Search.ipynb      # Búsqueda y construcción de modelos (493KB)
-│   ├── 📄 Model Consumption.ipynb         # Consumo y evaluación de modelos (146KB)
-│   └── 📄 temporary.ipynb                 # Notebook temporal (58KB)
+├── 📓 notebooks/                          # Jupyter analysis notebooks
+│   ├── 📄 Exploratory analysis.ipynb      # Initial exploratory analysis
+│   ├── 📄 Feature Engineering.ipynb       # Feature engineering
+│   ├── 📄 Model Builder Search.ipynb      # Model search and construction
+│   └── 📄 Model Consumption.ipynb         # Model consumption and evaluation
 │
-├── 🤖 models/                             # Modelos entrenados
-│   ├── 📄 solar_feature_engineer.joblib   # Preprocesador de características (13KB)
-│   └── 📄 solar_generation_model.joblib   # Modelo de predicción de generación (44MB)
+├── 🤖 models/                             # Trained models
+│   ├── 📄 solar_feature_engineer.joblib   # Feature preprocessor (13KB)
+│   └── 📄 solar_generation_model.joblib   # Generation prediction model (44MB)
 │
-├── 📈 power_bi/                           # Archivos de Power BI
-│   ├── 📄 energy-generation-prediction-dashboard.pbix  # Dashboard principal (1.9MB)
-│   └── 📄 Simple Design.pptx              # Diseño del dashboard (696KB)
+├── 📈 power_bi/                           # Power BI files
+│   └── 📄 energy-generation-prediction-dashboard.pbix  # Main dashboard
 │
-├── 📚 docs/                               # Documentación del proyecto
-│   ├── 📄 Presentation.pptx               # Presentación del proyecto (2.3MB)
-│   ├── 📄 Predicción de la Generación Fotovoltaica a Gran Escala.docx
-│   ├── 📄 Azure Resources.docx            # Recursos de Azure utilizados (469KB)
-│   ├── 📄 Transform Plants ADF.xlsx       # Transformaciones en ADF (12KB)
-│   ├── 📄 Erros in Post-Despacho DB.txt   # Errores encontrados en la base de datos
-│   ├── 📄 Image of Proyect.docx           # Imágenes del proyecto (230KB)
-│   ├── 📄 ESTRUCTURA_CIENCIA_DATOS.md    # Documentación técnica detallada
-│   └── 📄 ARQUITECTURA_DIAGRAMA.md        # Diagrama de arquitectura
-│
-└── ☁️ az/                                 # Configuraciones de Azure (vacío actualmente)
+└── 📚 docs/                               # Project documentation
+    ├── 📄 ARQUITECTURA_DIAGRAMA.md        # Architecture diagram
+    ├── 📄 ESTRUCTURA_CIENCIA_DATOS.md    # Detailed technical documentation
+    └── 📄 Erros in Post-Despacho DB.txt   # Errors found in the database
 ```
 
-## 🔬 Componentes de Ciencia de Datos
+## 🔬 Data Science Components
 
-### 1. **Ingeniería de Características (`src/feature_engineer.py`)**
+### 1. **Feature Engineering (`src/feature_engineer.py`)**
 
-La clase `SolarFeatureEngineer` implementa un pipeline completo de preprocesamiento:
+The `SolarFeatureEngineer` class implements a complete preprocessing pipeline:
 
 ```python
 class SolarFeatureEngineer(BaseEstimator, TransformerMixin):
     def __init__(self, target='generation', max_lag=24, 
                  roll_windows=None, log_transform_cols=None):
-        # Configuración del preprocesador
+        # Preprocessor configuration
 ```
 
-**Características generadas:**
-- **⏰ Temporales**: hora, día, mes (con codificación cíclica)
-- **📈 Lags**: valores retrasados de variables meteorológicas
-- **📊 Rolling windows**: medias móviles (3h, 6h, 24h)
-- **🔄 Diferencias**: para variables no estacionarias
-- **📈 Transformaciones logarítmicas**: para variables de radiación
+**Generated features:**
+- **⏰ Temporal**: hour, day, month (with cyclical encoding)
+- **📈 Lags**: lagged values of meteorological variables
+- **📊 Rolling windows**: moving averages (3h, 6h, 24h)
+- **🔄 Differences**: for non-stationary variables
+- **📈 Logarithmic transformations**: for radiation variables
 
-### 2. **Pipeline de Procesamiento (`src/`)**
+### 2. **Processing Pipeline (`src/`)**
 
-El pipeline sigue un flujo secuencial:
+The pipeline follows a sequential flow:
 
 ```python
-# 1. Descarga de datos
+# 1. Data download
 01 - data_post_despacho_downloader.py
     ↓
-# 2. Transformación y limpieza
+# 2. Transformation and cleaning
 02 - DB_post_despacho_transform.py
     ↓
-# 3. Obtención de datos meteorológicos
+# 3. Meteorological data acquisition
 03 - open_meteo_history_plant_data.py
     ↓
-# 4. Fusión de datos
+# 4. Data merging
 04 - open_meteo_post_despacho_merger.py
     ↓
-# 5. Ingeniería de características
+# 5. Feature engineering
 feature_engineer.py
 ```
 
-### 3. **Análisis Exploratorio (`notebooks/`)**
+### 3. **Exploratory Analysis (`notebooks/`)**
 
-- **`Exploratory analysis.ipynb`**: Análisis inicial de datos (9.6MB)
-- **`Feature Engineering.ipynb`**: Desarrollo de características (368KB)
-- **`Model Builder Search.ipynb`**: Búsqueda y optimización de modelos (493KB)
-- **`Model Consumption.ipynb`**: Consumo y evaluación de modelos (146KB)
+- **`Exploratory analysis.ipynb`**: Initial data analysis
+- **`Feature Engineering.ipynb`**: Feature development
+- **`Model Builder Search.ipynb`**: Model search and optimization
+- **`Model Consumption.ipynb`**: Model consumption and evaluation
 
-## 🚀 Pipeline de Predicción
+## 🚀 Prediction Pipeline
 
-### 1. **Obtención de Datos de Pronóstico**
+### 1. **Forecast Data Acquisition**
 
 ```python
 # Model Consumption.ipynb
 def main():
-    # 1. Obtener pronóstico meteorológico (7 días)
+    # 1. Get meteorological forecast (7 days)
     client = openmeteo_requests.Client(session=sess)
     params = {
         "latitude": 18.2158,      # Parque Solar Girasol
         "longitude": -71.0998,
-        "hourly": vars_hr,        # 50+ variables meteorológicas
+        "hourly": vars_hr,        # 50+ meteorological variables
         "forecast_days": 7
     }
     
-    # 2. Cargar datos históricos de generación
+    # 2. Load historical generation data
     df_h = pd.read_parquet(hist_file)
     
-    # 3. Combinar histórico + pronóstico
-    df_m["generation"] = gen  # Histórico + ceros para futuro
+    # 3. Combine historical + forecast
+    df_m["generation"] = gen  # Historical + zeros for future
 ```
 
-### 2. **Preprocesamiento**
+### 2. **Preprocessing**
 
 ```python
-# Aplicar el pipeline de características
+# Apply the feature pipeline
 feature_engineer = joblib.load('models/solar_feature_engineer.joblib')
 model = joblib.load('models/solar_generation_model.joblib')
 
-# Transformar datos
+# Transform data
 X_transformed = feature_engineer.transform(X_new)
 predictions = model.predict(X_transformed)
 ```
 
-## 🎯 Preparación para Azure Functions
+## 🎯 Azure Functions Preparation
 
-### 1. **Dependencias Clave**
+### 1. **Key Dependencies**
 
 ```txt
-# requirements.txt - Dependencias para Azure Functions
+# requirements.txt - Dependencies for Azure Functions
 pandas==2.2.3
 numpy==2.1.3
 scikit-learn==1.5.2
@@ -273,21 +243,21 @@ requests-cache==1.2.1
 retry-requests==2.0.0
 ```
 
-### 2. **Estructura para Azure Functions**
+### 2. **Structure for Azure Functions**
 
 ```
 azure-function-repo/
-├── function_app.py              # Función principal
-├── models/                      # Modelos serializados
+├── function_app.py              # Main function
+├── models/                      # Serialized models
 │   ├── solar_feature_engineer.joblib
 │   └── solar_generation_model.joblib
 ├── utils/
-│   ├── data_processor.py        # Procesamiento de datos
-│   └── feature_engineer.py     # Ingeniería de características
+│   ├── data_processor.py        # Data processing
+│   └── feature_engineer.py     # Feature engineering
 └── requirements.txt
 ```
 
-### 3. **Flujo de Predicción en Azure**
+### 3. **Prediction Flow in Azure**
 
 ```python
 # function_app.py
@@ -296,77 +266,114 @@ import pandas as pd
 from utils.feature_engineer import SolarFeatureEngineer
 
 def predict_generation(meteo_data):
-    # 1. Cargar modelos
+    # 1. Load models
     feature_engineer = joblib.load('models/solar_feature_engineer.joblib')
     model = joblib.load('models/solar_generation_model.joblib')
     
-    # 2. Preprocesar datos
+    # 2. Preprocess data
     X_transformed = feature_engineer.transform(meteo_data)
     
-    # 3. Predecir
+    # 3. Predict
     predictions = model.predict(X_transformed)
     
     return predictions
 ```
 
-## 📈 Métricas y Evaluación
+## 📈 Metrics and Evaluation
 
-### 1. **Métricas de Modelo**
-- **RMSE**: Error cuadrático medio
-- **MAE**: Error absoluto medio
-- **R²**: Coeficiente de determinación
-- **MAPE**: Error porcentual absoluto medio
+### 1. **Model Metrics**
+- **RMSE**: Root Mean Square Error
+- **MAE**: Mean Absolute Error
+- **R²**: Coefficient of determination
+- **MAPE**: Mean Absolute Percentage Error
 
-### 2. **Validación Temporal**
-- **TimeSeriesSplit**: Validación cruzada temporal
-- **Walk-forward validation**: Simulación de predicción en tiempo real
+### 2. **Temporal Validation**
+- **TimeSeriesSplit**: Temporal cross-validation
+- **Walk-forward validation**: Real-time prediction simulation
 
-## 🔄 Flujo de Trabajo Completo
+## 🔄 Complete Workflow
 
 ```
-1. Datos Históricos (2013) → Limpieza → Características → Entrenamiento
-2. Datos de Pronóstico (API) → Preprocesamiento → Predicción
-3. Modelo Entrenado → Serialización → Azure Functions
-4. Azure Functions → API REST → Power BI Dashboard
+1. Historical Data (2013) → Cleaning → Features → Training
+2. Forecast Data (API) → Preprocessing → Prediction
+3. Trained Model → Serialization → Azure Functions
+4. Azure Functions → REST API → Power BI Dashboard
 ```
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
-### **Ciencia de Datos:**
-- **pandas/numpy**: Manipulación de datos
-- **scikit-learn**: Modelado de ML
-- **statsmodels**: Análisis de series temporales
-- **joblib**: Serialización de modelos
+### **Data Science:**
+- **pandas/numpy**: Data manipulation
+- **scikit-learn**: ML modeling
+- **statsmodels**: Time series analysis
+- **joblib**: Model serialization
 
-### **APIs y Datos:**
-- **Open-Meteo API**: Datos meteorológicos
-- **Post-Despacho API**: Datos de generación real
-- **requests-cache**: Caché de requests
+### **APIs and Data:**
+- **Open-Meteo API**: Meteorological data
+- **Post-Despacho API**: Real generation data
+- **requests-cache**: Request caching
 
-### **Visualización:**
-- **Power BI**: Dashboard de predicciones
-- **matplotlib/seaborn**: Análisis exploratorio
+### **Visualization:**
+- **Power BI**: Prediction dashboard
+- **matplotlib/seaborn**: Exploratory analysis
 
-## 📋 Próximos Pasos para Azure Functions
+## 📋 Next Steps for Azure Functions
 
-1. **Extraer código de predicción** de `Model Consumption.ipynb`
-2. **Crear función Azure** con el pipeline de predicción
-3. **Serializar modelos** y dependencias
-4. **Configurar triggers** (HTTP, Timer, etc.)
-5. **Implementar logging** y monitoreo
-6. **Configurar CI/CD** para despliegue automático
+1. **Extract prediction code** from `Model Consumption.ipynb`
+2. **Create Azure function** with prediction pipeline
+3. **Serialize models** and dependencies
+4. **Configure triggers** (HTTP, Timer, etc.)
+5. **Implement logging** and monitoring
+6. **Configure CI/CD** for automatic deployment
 
-## 🎯 Beneficios de esta Arquitectura
+## 🎯 Benefits of this Architecture
 
-- **Separación clara**: Ciencia de datos vs. despliegue
-- **Reproducibilidad**: Pipeline completo documentado
-- **Escalabilidad**: Fácil despliegue en Azure
-- **Mantenibilidad**: Código modular y bien estructurado
-- **Monitoreo**: Métricas y logs para seguimiento
+- **Clear separation**: Data science vs. deployment
+- **Reproducibility**: Complete documented pipeline
+- **Scalability**: Easy Azure deployment
+- **Maintainability**: Modular and well-structured code
+- **Monitoring**: Metrics and logs for tracking
 
-## 📚 Documentación Adicional
+## 📚 Additional Documentation
 
-- **`docs/ESTRUCTURA_CIENCIA_DATOS.md`**: Documentación técnica detallada
-- **`docs/ARQUITECTURA_DIAGRAMA.md`**: Diagrama de arquitectura completo
-- **`docs/Azure Resources.docx`**: Recursos de Azure utilizados
-- **`docs/Presentation.pptx`**: Presentación del proyecto
+- **`docs/ESTRUCTURA_CIENCIA_DATOS.md`**: Detailed technical documentation
+- **`docs/ARQUITECTURA_DIAGRAMA.md`**: Complete architecture diagram
+- **`docs/Erros in Post-Despacho DB.txt`**: Database errors found
+
+## 🔧 Data Sources
+
+### **Post-Despacho Data (2013)**
+- **Source**: Dominican Republic's electricity market
+- **Period**: December 2022 - September 2025
+- **Format**: Daily .parquet files
+- **Content**: Real solar generation data from Parque Solar Girasol
+
+### **Meteorological Data**
+- **Source**: Open-Meteo API
+- **Variables**: 30+ meteorological parameters
+- **Frequency**: Hourly data
+- **Coverage**: Historical + 7-day forecasts
+
+### **Solar Plant Information**
+- **Plant**: Parque Solar Girasol
+- **Location**: 18.2158°N, -71.0998°W
+- **Capacity**: Solar photovoltaic generation
+- **Data**: Plant specifications and metadata
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+2. **Install dependencies**: `pip install -r requirements.txt`
+3. **Run notebooks** in order: Exploratory → Feature Engineering → Model Search → Model Consumption
+4. **Load models** for predictions
+5. **Deploy to Azure Functions** for production
+
+## 📊 Model Performance
+
+The final model achieves:
+- **High accuracy** in solar generation prediction
+- **Robust performance** across different weather conditions
+- **Real-time capability** for operational use
+- **Scalable architecture** for multiple solar plants
+
+This project demonstrates a complete end-to-end data science solution for renewable energy prediction, from data collection to production deployment.

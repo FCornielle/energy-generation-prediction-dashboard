@@ -1,3 +1,15 @@
 my_environment/
 data/interim/post_despacho_transformed_data/post_despacho_transformed.csv
-
+notebooks/GetPostDespacho_transformed.parquet
+notebooks/try.csv
+notebooks/Model_Comparison_Table.md
+notebooks/Model_Comparison_Table.csv
+notebooks/GetPostDespacho_2025-07-07-10.csv
+notebooks/.cache.sqlite
+.cache.sqlite
+manage service principal.txt
+src/__pycache__
+notebooks/temporary.ipynb
+requirements.txt
+docs/Erros in Post-Despacho DB.txt
+notebooks/Model Consumption.ipynb
