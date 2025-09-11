@@ -9,3 +9,4 @@ notebooks/.cache.sqlite
 .cache.sqlite
 manage service principal.txt
 src/__pycache__
+notebooks/temporary.ipynb

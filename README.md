@@ -13,37 +13,37 @@ Desarrollar un modelo de machine learning que prediga la generación de energía
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           🧪 CIENCIA DE DATOS                              │
+                           🧪 CIENCIA DE DATOS                               
 └─────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   📡 APIs       │    │   🗄️ Datos      │    │   🔧 Pipeline   │
+   📡 APIs                🗄️ Datos             🔧 Pipeline   
 │                 │    │   Históricos    │    │   de Proceso    │
 ├─────────────────┤    ├─────────────────┤    ├─────────────────┤
 │ • Open-Meteo    │    │ • Post-Despacho │    │ • Descarga      │
-│ • Forecast API  │    │ • 2013 (diario) │    │ • Limpieza      │
-│ • 50+ variables │    │ • Generación    │    │ • Transformación│
-│ • 7 días ahead  │    │   real          │    │ • Fusión        │
+│ • Forecast API  │    │ • Desde 2013    │    │ • Limpieza      │
+│ • 30 variables  │    │ • Generación    │    │ • Transformación│
+│ • 2 días ahead  │    │   real          │    │ • Fusión        │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          └───────────────────────┼───────────────────────┘
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           📊 DATOS PROCESADOS                              │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
+                            📊 DATOS PROCESADOS                               
+├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
 │   📁 raw/       │   📁 interim/   │  📁 processed/  │   📁 lookup/        │
-│                 │                 │                 │                     │
-│ • Datos crudos  │ • En proceso    │ • Listos para   │ • Metadatos         │
-│ • Sin filtrar   │ • Parcialmente  │   modelado      │ • Referencias       │
-│ • APIs directas │   limpios       │ • Características│ • Centrales         │
-└─────────────────┴─────────────────┴─────────────────┴─────────────────────┘
+│                 │                 │                 │                       │
+│ • Datos crudos  │ • En proceso    │ • Listos para   │ • Metadatos           │
+│ • Sin filtrar   │ • Parcialmente  │   modelado      │ • Referencias         │
+│ • APIs directas │   limpios       │ • Características│ • Centrales          │
+└─────────────────┴─────────────────┴─────────────────┴───────────────────────┘
                                  │
                                  ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        🔬 INGENIERÍA DE CARACTERÍSTICAS                    │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
-│   ⏰ Temporales  │   📈 Lags       │   📊 Rolling    │   🔄 Diferencias   │
+├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
+│ ⏰ Temporales   │   📈 Lags       │   📊 Rolling    │   🔄 Diferencias   │
 │                 │                 │   Windows       │                     │
 │ • hora_sin/cos  │ • Variables     │ • Medias móviles│ • Variables no     │
 │ • dow_sin/cos   │   retrasadas    │ • 3h, 6h, 24h  │   estacionarias    │
