@@ -10,3 +10,5 @@ notebooks/.cache.sqlite
 manage service principal.txt
 src/__pycache__
 notebooks/temporary.ipynb
+requirements.txt
+docs/Erros in Post-Despacho DB.txt
